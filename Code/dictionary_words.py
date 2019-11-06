@@ -1,3 +1,4 @@
+#Thanks to Mark Kim for helping me build this out
 import sys
 from random import choice
 
