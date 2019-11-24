@@ -20,25 +20,57 @@ class Listogram(list):
 
     def add_count(self, word, count=1):
         """Increase frequency count of given word by given count amount."""
-        # TODO: Increase word frequency by count
-
+        temp_list = [word, count]
+        found_word = False
+        found_index = None
+        for index, value in enumerate(self):
+            if value[0] == word:
+                found_word = True
+                found_index = index
+        if found_word:
+            self[found_index][1] += count
+        else:
+            self.append(temp_list)
+        self.tokens += count
+        self.types = len(self)
+        
     def frequency(self, word):
         """Return frequency count of given word, or 0 if word is not found."""
-        # TODO: Retrieve word frequency count
+        for index, value in enumerate(self):
+            if value[0] == word:
+                return self[index][1]
+        return 0
+
 
     def __contains__(self, word):
         """Return boolean indicating if given word is in this histogram."""
-        # TODO: Check if word is in this histogram
+        for index, value in enumerate(self):
+            if value[0] == word:
+                return True
+        return False
+    
 
     def index_of(self, target):
         """Return the index of entry containing given target word if found in
         this histogram, or None if target word is not found."""
         # TODO: Implement linear search to find index of entry with target word
+        for index, value in enumerate(self):
+            if value == target:
+                return index
+        return None
 
     def sample(self):
         """Return a word from this histogram, randomly sampled by weighting
         each word's probability of being chosen by its observed frequency."""
-        # TODO: Randomly choose a word based on its frequency in this histogram
+        upper_bound = 0
+        for index in range(len(self)):
+            upper_bound += self[index][1]
+        rand_num = random.randint(1, upper_bound)
+        total = 0
+        for index in range(len(self)):
+            total += self[index][1]
+            if total >= rand_num:
+                return self[index][0]
 
 
 def print_histogram(word_list):

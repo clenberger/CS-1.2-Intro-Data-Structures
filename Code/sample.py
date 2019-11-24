@@ -1,6 +1,8 @@
 import random 
 import sys
 from histograms import histogram
+
+
 def sample_dict(hist):
     total_tokens = sum(hist.values())
     rand_num = random.randint(1,total_tokens)

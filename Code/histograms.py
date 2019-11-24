@@ -4,20 +4,19 @@ import re
 words_file = 'Code/words.txt'
 
 def book(words_file):
-    '''Opens text file and arranges words into a readable list '''    
+    '''Opens text file and arranges words into a readable list '''
     with open (words_file, 'r') as f:
         words = f.read()
         scrubbed_words = re.sub(r'[^a-zA-Z\s]', '', words)
     return scrubbed_words.split(" ")
 
 
-def histogram(words_file):
+def histogram(words_list):
     '''Takes text argument and returns a histogram data structure in a dictionary form'''
     histogram = {}
-    words = book(words_file) 
-    for word in words:
+    for word in words_list:
         if word.lower() in histogram:
-            histogram[word] += 91
+            histogram[word] += 1
         else:
             histogram[word] = 1
     return histogram
@@ -54,7 +53,7 @@ def unique_words(words_file):
     for word in words:
         if word in histogram:
             histogram[word] = histogram[word] + 1
-        else: 
+        else:
             histogram[word] = 1
     print(len(histogram))
 
@@ -65,7 +64,7 @@ def frequency(search, words_file):
     for word in words:
         if word in histogram:
             histogram[word] = histogram[word] + 1
-        else: 
+        else:
             histogram[word] = 1
     print (histogram.get(search, 0))
 
